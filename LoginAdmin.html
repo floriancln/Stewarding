@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AuthentificationElevate.ejs</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap/examples/sign-in/signin.css">
+    <link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="container-fluid text-center">
+
+    <main class="form-signin">
+        <form action="/authentification" method="POST">
+
+            <img class="mb-4" src="Ressources/elevateproqual.png" alt="" width="300" height="60">
+
+            <div class="mb-3">
+                <label class="form-label">Identifiant</label>
+                <input type="text" name="username" class="form-control" value="florian@colin.com"required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mot de passe</label>
+                <input type="password" name="password" class="form-control" value="123" required>
+            </div>
+
+            <!-- créer un bouton identifier "btValider" qui nous servira dans js et jQuery à valider les éléments rentrés par l'utilisateur -->
+            <button type="submit" name='btValider' id='btValider' class="btn btn-primary">
+                Valider
+            </button>
+
+        </form>
+
+        <p>
+            <label id="lblMessage" class="texteOrange">
+                
+            </label>
+        </p>
+    </main>
+</body>
+<!--<script src="../public/ressources/jquery.js"></script>-->
+
+</html>

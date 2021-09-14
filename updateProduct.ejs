@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>updateProduct.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<div class="mb-3">
+	<!-- Link formed as a button to get back to the previous page-->
+	<a class="btn btn-primary" type="button" href="products">
+		<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+			fill="%ffd700" alt="back-to-products">
+	</a>
+</div>
+
+<body class="container-fluid">
+	<h1 class="mb-6 row justify-content-center">Modification d'un produit</h1>
+	<div class="row justify-content-center">
+		<div class="col-md-3">
+			<!-- Beginning of the form with a GET method referencing to the app.get in app.js-->
+			<form method="GET" action="/updateSelectionProduct" id="formUpdateProduct">
+				<div class="mb-3">
+					<label class="row justify-content-center">Produit à modifier</label>
+					<select class="form-control" name="id_product" id="id_product">
+						<option value="0">Sélectionnez le produit</option>
+						<!-- Route made with ejs in order to execute a function(product) with a .forEach() method
+						This will allow to loop into each element of the table identified by productList in app.js  -->
+						<% productList.forEach(function(product) { %>
+							<!-- this retrieves each element by their id-->
+							<option value="<%= product['id_product'] %>">
+								<!-- the name of each product matching his id will appear here in the form-->
+								<%= product['name_product'] %>
+							</option>
+							<% }); %>
+					</select>
+					<br>
+					<div class="row justify-content-center">
+						<input type="submit" value="Sélectionnez" class="btn btn-primary" />
+					</div>
+					
+				</div>
+			</form>
+
+			<form method="POST" action="/updateProductValidation">
+				<fieldset>
+					<legend>Modifiez avant de valider</legend>
+					<p>
+						<label class="row justify-content-center">Identifiant produit</label>
+						<!-- the ejs route here allow to retrieve the data from the json table
+							 corresponding to the id selected by the user. This json table
+							  is déclared into a row variable located into the corresponding app.get -->
+						<input class="form-control" type="text" name="id_product" id="id_product"
+							value="<%= row['id_product'] %>" size="5" readonly
+							 />
+					</p>
+					<p>
+						<label class=" row justify-content-center">Référence</label>
+						<input class="form-control" type="text" name="reference_product" id="reference_product"
+							value="<%= row['reference_product'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Nom</label>
+						<input class="form-control" type="text" name="name_product" id="name_product"
+							value="<%= row['name_product'] %> " />
+					</p>
+					<p>
+						<label class=" row justify-content-center">Prix d'achat</label>
+						<input class="form-control" type="text" name="price_wt_product" id="price_wt_product"
+							value="<%= row['price_wt_product'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Description</label>
+						<input class="form-control" type="text" name="description_product" id="description_product"
+							value="<%= row['description_product'] %> " />
+					</p>
+					<label class="row justify-content-center">Fournisseur</label>
+					<select class="form-control" name="id_supplier" id="id_supplier">
+						<option value="0 ">Fournisseur</option>
+						<!-- being able to call datas from suppliers table and categories table 
+							is made possible because of the promises declared into the 
+							promise.all method() located into the corresponding app.get-->
+						<% supplierList.forEach(function(supplier) { %>
+							<option value="<%=supplier['id_supplier'] %>">
+								<%= supplier['name_supplier'] %>
+							</option>
+							<% }); %>
+					</select>
+					<label class="row justify-content-center">Catégorie</label>
+					<select class="form-control" name="id_category" id="id_category">
+						<option value="0 ">Catégorie</option>
+						<% categoryList.forEach(function(category) { %>
+							<option value="<%=category['id_category'] %>">
+								<%= category['name_category'] %>
+							</option>
+							<% }); %>
+					</select>
+					</p>
+					<p>
+						<input type="reset" value="Réinitialiser" class="btn btn-warning" />
+						<input type="submit" value="Valider" class="btn btn-success" />
+					</p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<p>
+		<%=message %>
+	</p>
+	<p id="lblMessage"></p>
+	</article>
+	<footer>
+		<%- include("partials/footerBackOffice.ejs"); -%>
+	</footer>
+	<script>
+        // document.getElementById("btValider").addEventListener("click", function(event) {
+        //     event.preventDefault();
+        //     console.log(document.getElementById("prix").value);
+        //     let prix = document.getElementById("prix").value;
+        //     console.log(!isNaN(prix));
+        //     //alert("POST ANNULE");
+        //     if (estNumeriqueEntier(document.getElementById("prix").value)) {
+        //         document.getElementById("formulaireAjoutProduit").submit();
+        //         //document.getElementById("messageClient").innerHTML = "Formulaire validé";
+        //     } else {
+        //         document.getElementById("messageClient").innerHTML = "Formulaire invalide";
+        //     }
+        // });
+	</script>
+</body>
+
+</html

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>insertService.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<body class="container-fluid">
+	<div class="mb-3">
+		<a class="btn btn-primary" type="button" href="dashboard">
+			<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30"
+				height="30" fill="%ffd700" alt="retour-tableau-de-bord">
+		</a>
+		<a class="btn btn-success" type="button" href="insertCleaningAgent">
+			<img src="css/bootstrap/bootstrap-icons/icons/plus-circle-fill.svg" width="30"
+				height="30" fill="%ffd700" alt="ajouter-produit-entretien">
+		</a>
+
+		<a class="btn btn-danger" type="button" href="deleteCleaningAgent">
+			<img src="css/bootstrap/bootstrap-icons/icons/trash-fill.svg" width="30" height="30"
+				fill="%ffd700" alt="supprimer-produit-entretien">
+		</a>
+
+		<a class="btn btn-warning" type="button" href="updateCleaningAgent">
+			<img src="css/bootstrap/bootstrap-icons/icons/arrow-clockwise.svg" width="30"
+				height="30" fill="%ffd700" alt="modifier-produit-entretien">
+		</a>
+	</div>
+	<div>
+		<h1>Produits référencés</h1>
+		<p>
+			Nombre de produits au catalogue :
+			<%=cleaningAgentList.length %>
+		</p>
+		
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Référence Produits</th>
+					<th>Nom du produit</th>
+					<th>Prix d'achat HT</th>
+					<th>Description</th>
+					<th>Fournisseur</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% cleaningAgentList.forEach(function(cleaning_agents){%>
+					<tr>
+						<td>
+							<%= cleaning_agents.reference_cleaning_agent %>
+						</td>
+						<td>
+							<%= cleaning_agents.name_cleaning_agent %>
+						</td>
+						<td>
+							<%= cleaning_agents.price_wt_cleaning_agent %>&euro;
+						</td>
+						<td>
+							<%= cleaning_agents.description_cleaning_agent %>
+						</td>
+						<td>
+							<%= cleaning_agents.id_supplier %>
+						</td>
+						<td>
+							<a href="updateCleaningAgent" class="btn btn-warning"
+								name="modifier">Modifier</a>
+						</td>
+						<td>
+							<a href="deleteCleaningAgent" class="btn btn-danger"
+								id="deleteCleaningAgent">
+								<img
+									src="css/bootstrap/bootstrap-icons/icons/trash-fill.svg">
+							</a>
+						</td>
+					</tr>
+					<% }); %>
+			</tbody>
+		</table>
+		<p id="messageClient"></p>
+	</div>
+	<footer>
+		<%- include ("partials/footerBackOffice.ejs"); -%>
+	</footer>
+</body>
+
+</html>

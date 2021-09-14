@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>updateService.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<div class="mb-3">
+	<a class="btn btn-primary" type="button" href="services">
+		<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+			fill="%ffd700" alt="back-to-services">
+	</a>
+</div>
+
+<body class="container-fluid">
+	<h1 class="mb-6 row justify-content-center">Modification d'un service</h1>
+	<div class="row justify-content-center">
+		<div class="col-md-3">
+			<form method="GET" action="/updateSelectionService" id="formUpdateService">
+				<div class="mb-3">
+					<label class="row justify-content-center">Service à modifier</label>
+					<select class="form-control" name="id_service" id="id_service">
+						<option value="0">Sélectionnez le service</option>
+						<% serviceList.forEach(function(service) { %>
+							<option value="<%= service['id_service'] %>">
+								<%= service['name_service'] %>
+							</option>
+							<% }); %>
+					</select>
+					<br>
+					<div class="row justify-content-center">
+						<input type="submit" value="Sélectionnez" class="btn btn-primary" />
+					</div>
+					
+				</div>
+			</form>
+
+			<form method="POST" action="/updateServiceValidation">
+				<fieldset>
+					<legend>Modifiez avant de valider</legend>
+					<p>
+						<label class="row justify-content-center">Identifiant service</label>
+						<input class="form-control" type="text" name="id_service" id="id_service"
+							value="<%= row['id_service'] %>" size="5" readonly
+							 />
+					</p>
+					<p>
+						<label class=" row justify-content-center">Nom du service</label>
+						<input class="form-control" type="text" name="name_service" id="name_service"
+							value="<%= row['name_service'] %> " />
+					</p>
+					<p>
+					<label class="row justify-content-center">Utilisateur</label>
+					<select class="form-control" name="id_user" id="id_user">
+						<option value="0 ">Utilisateur</option>
+						<% userList.forEach(function(user) { %>
+							<option value="<%=user['id_user'] %>">
+								<%= user['name_user'] %>
+							</option>
+							<% }); %>
+					</select>
+					</p>
+					<p>
+						<input type="reset" value="Réinitialiser" class="btn btn-warning" />
+						<input type="submit" value="Valider" class="btn btn-success" />
+					</p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<p>
+		<%=message %>
+	</p>
+	<p id="lblMessage"></p>
+	</article>
+	<footer>
+		<%- include("partials/footerBackOffice.ejs"); -%>
+	</footer>
+	<script>
+        // document.getElementById("btValider").addEventListener("click", function(event) {
+        //     event.preventDefault();
+        //     console.log(document.getElementById("prix").value);
+        //     let prix = document.getElementById("prix").value;
+        //     console.log(!isNaN(prix));
+        //     //alert("POST ANNULE");
+        //     if (estNumeriqueEntier(document.getElementById("prix").value)) {
+        //         document.getElementById("formulaireAjoutProduit").submit();
+        //         //document.getElementById("messageClient").innerHTML = "Formulaire validé";
+        //     } else {
+        //         document.getElementById("messageClient").innerHTML = "Formulaire invalide";
+        //     }
+        // });
+	</script>
+</body>
+
+</html

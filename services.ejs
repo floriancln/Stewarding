@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>services.ejs</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+    <%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<body class="container-fluid">
+    <div>
+        <h1>Produits référencés</h1>
+        <div class="mb-3">
+                <a class="btn btn-primary" type="button" href="dashboard">
+                    <img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+                        fill="%ffd700" alt="back-to-dashboard">
+                </a>
+
+                <a class="btn btn-success" type="button" href="insertService">
+                    <img src="css/bootstrap/bootstrap-icons/icons/plus-circle-fill.svg"width="30" height="30" fill="%ffd700" alt="add-service">
+                </a>
+            
+                <a class="btn btn-danger" type="button" href="deleteService">
+                    <img src="css/bootstrap/bootstrap-icons/icons/trash-fill.svg" width="30" height="30"
+                        fill="%ffd700" alt="delete-service">
+                </a>
+        
+                <a class="btn btn-warning" type="button" href="updateService">
+                    <img src="css/bootstrap/bootstrap-icons/icons/arrow-clockwise.svg" width="30" height="30"
+                        fill="%ffd700" alt="update-service">
+                </a>
+
+                <a href="/insertUser" class="btn btn-primary" type="button" >Utilisateurs</a>
+        </div>
+
+        <table class="table" method="GET">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Nom Utilisateur</th>
+                    <th>Prénom Utilisateur</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% serviceList.forEach(function(services){%>
+                    <tr>
+
+                        <td>
+                            <%= services.name_service %>
+                        </td>
+                        <td>
+                            <%= services.name_user %>
+                        </td>
+                        <td>
+                            <%= services.firstname_user %>
+                        </td>
+                    </tr>
+                    <% }); %>
+
+
+            </tbody>
+        </table>
+        <p id="messageClient"></p>
+    </div>
+    <footer>
+        <%- include ("partials/footerBackOffice.ejs"); -%>
+    </footer>
+</body>
+
+
+
+</html>

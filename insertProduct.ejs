@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>insertProduct.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<div class="mb-3">
+	<a class="btn btn-primary type="button" href="products">
+		<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+			fill="%ffd700" alt="back-to-products">
+	</a>
+</div>
+
+<body class="container-fluid">
+	<h1 class="mb-6 row justify-content-center">Ajouter un produit au catalogue</h1>
+	<div class="row justify-content-center">
+		<div class="col-md-3">
+			<form method="POST" action="/insertProductValidation" id="formulaireAjoutProduit">
+				<div class="mb-3">
+					<label class="row justify-content-center">Référence</label>
+					<input type="text" class="form-control" name="reference_product"
+						id="reference_product" value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Nom du produit</label>
+					<input type="textarea" class="form-control" name="name_product"
+						id="name_product" value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Prix d'achat HT en Euros</label>
+					<input type="text" class="form-control" name="price_wt_product"
+						id="price_wt_product" value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Description</label>
+					<input type="text" class="form-control" name="description_product"
+						id="description_product" value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Fournisseur</label>
+					<select class="form-control" type="text" name="id_supplier" value="">
+						<option>Choisissez un fournisseur</option>
+						<% supplierList.forEach(function(suppliers){%>
+							<option value="<%= suppliers.id_supplier %>">
+								<%= suppliers.name_supplier %>
+							</option>
+							<% }); %>
+
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Catégorie</label>
+					<select class="form-control" type="text" name="id_category" value="">
+						<option>Choisissez une catégorie</option>
+						<% categoryList.forEach(function(categories){%>
+							<option value="<%= categories.id_category %>">
+								<%= categories.name_category %>
+							</option>
+							<% }); %>
+
+					</select>
+				</div>
+
+				<div class="row justify-content-center">
+					<input type="submit" class="btn btn-primary " value="Valider" id="btValider"
+						class="bouton" />
+				</div>
+			</form>
+			<p>
+				<%=message %>
+			</p>
+		</div>
+	</div>
+	<footer>
+		<%- include ("partials/footerBackOffice.ejs"); -%>
+	</footer>
+</body>
+
+</html>

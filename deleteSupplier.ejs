@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>deleteSupplier.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<div class="mb-3">
+	<a class="btn btn-primary" type="button" href="suppliers">
+		<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+			fill="%ffd700" alt="back-to-suppliers">
+	</a>
+</div>
+
+<body class="container-fluid">
+	<article>
+		<h1 class="mb-6 row justify-content-center">Suppression d'un fournisseur</h1>
+		<div class="row justify-content-center">
+			<div class="col-md-3">
+				<form method="POST" class="" action="/deleteSupplierValidation">
+					<div class="mb-3">
+						<label class="row justify-content-center">Choisir le fournisseur</label>
+						<select class="form-control" name="id_supplier" id="id_supplier">
+							<option value="0">Sélectionnez le fournisseur</option>
+							<% supplierList.forEach(function(supplier) { %>
+								<option value="<%= supplier['id_supplier'] %>">
+									<%= supplier['name_supplier'] %>
+								</option>
+								<% }); %>
+						</select>
+					</div>
+					<div class="row justify-content-center">
+						<input type="submit" class="btn btn-danger " value="Supprimer"
+							id="btDelete" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<p>
+			<%=message %>
+		</p>
+		<p id="lblMessage"></p>
+	</article>
+	<footer>
+		<%- include("partials/FooterBackOffice.ejs"); -%>
+	</footer>
+	<script>
+        // document.getElementById("btValider").addEventListener("click", function(event) {
+        //     event.preventDefault();
+        //     console.log(document.getElementById("prix").value);
+        //     let prix = document.getElementById("prix").value;
+        //     console.log(!isNaN(prix));
+        //     //alert("POST ANNULE");
+        //     if (estNumeriqueEntier(document.getElementById("prix").value)) {
+        //         document.getElementById("formulaireAjoutProduit").submit();
+        //         //document.getElementById("messageClient").innerHTML = "Formulaire validé";
+        //     } else {
+        //         document.getElementById("messageClient").innerHTML = "Formulaire invalide";
+        //     }
+        // });
+	</script>
+</body>
+
+</html>

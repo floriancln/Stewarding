@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>products.ejs</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+    <%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<body class="container-fluid">
+    <div class="mb-1">
+		<a class="btn btn-primary" type="button" href="dashboard">
+			<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+				fill="%ffd700" alt="back-to-dashboard">
+		</a>
+
+        <a class="btn btn-success" type="button" href="insertProduct">
+            <img src="css/bootstrap/bootstrap-icons/icons/plus-circle-fill.svg"width="30" height="30" fill="%ffd700" alt="add-product">
+        </a>
+	
+		<a class="btn btn-danger" type="button" href="deleteProduct">
+			<img src="css/bootstrap/bootstrap-icons/icons/trash-fill.svg" width="30" height="30"
+				fill="%ffd700" alt="delete-product">
+		</a>
+
+		<a class="btn btn-warning" type="button" href="updateProduct">
+			<img src="css/bootstrap/bootstrap-icons/icons/arrow-clockwise.svg" width="30" height="30"
+				fill="%ffd700" alt="update-product">
+		</a>
+	</div>
+    <div>
+        <h1>Produits référencés</h1>
+        <p>
+            Nombre de produits au catalogue :
+            <%=productList.length %>
+        </p>
+        <div class="mb-3">
+            
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Nom produit</th>
+                    <th>Prix HT</th>
+                    <th>Description</th>
+                    <th>Fournisseur</th>
+                    <th>Catégorie</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% productList.forEach(function(products){%>
+                    <tr>
+                        <td>
+                            <%= products.reference_product %>
+                        </td>
+                        <td>
+                            <%= products.name_product %>
+                        </td>
+                        <td>
+                            <%= products.price_wt_product %>&euro;
+                        </td>
+                        <td>
+                            <%= products.description_product%>
+                        </td>
+                        <td>
+                            <%= products.name_supplier %>
+                        </td>
+                        <td>
+                            <%= products.name_category %>
+                        </td>
+
+                        <td>
+                            <a href="updateProduit" class="btn btn-warning" name="modifier">Modifier</a>
+                        </td>
+                        <td>
+                            <a href="deleteProduit" class="btn btn-danger">
+                                <img src="css/bootstrap/bootstrap-icons/icons/trash-fill.svg">
+                            </a> 
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        <p id="messageClient"></p>
+    </div>
+    <footer>
+        <%- include ("partials/footerBackOffice.ejs"); -%>
+    </footer>
+</body>
+
+
+
+</html>

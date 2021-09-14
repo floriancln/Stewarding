@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>updateSupplier.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+<div class="mb-3">
+	<a class="btn btn-primary" type="button" href="suppliers">
+		<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+			fill="%ffd700" alt="back-to-suppliers">
+	</a>
+</div>
+
+<body class="container-fluid">
+	<h1 class="mb-6 row justify-content-center">Modification d'un fournisseur</h1>
+	<div class="row justify-content-center">
+		<div class="col-md-3">
+			<form method="GET" action="/updateSelectionSupplier" id="formUpdateSupplier">
+				<div class="mb-3">
+					<label class="row justify-content-center">Fournisseur à modifier</label>
+					<select class="form-control" name="id_product" id="id_product">
+						<option value="0">Sélectionnez le fournisseur</option>
+						<% supplierList.forEach(function(supplier) { %>
+							<option value="<%= supplier['id_supplier'] %>">
+								<%= supplier['name_supplier'] %>
+							</option>
+							<% }); %>
+					</select>
+					<br>
+					<div class="row justify-content-center">
+						<input type="submit" value="Sélectionnez" class="btn btn-primary" />
+					</div>
+					
+				</div>
+			</form>
+
+			<form method="POST" action="/updateSupplierValidation">
+				<fieldset>
+					<legend>Modifiez avant de valider</legend>
+					<p>
+						<label class="row justify-content-center">Identifiant fournisseur</label>
+						<input class="form-control" type="text" name="id_supplier" id="id_supplier"
+							value="<%= row['id_supplier'] %>" size="5" readonly
+							 />
+					</p>
+					<p>
+						<label class=" row justify-content-center">Nom du fournisseur</label>
+						<input class="form-control" type="text" name="name_supplier" id="name_supplier"
+							value="<%= row['name_supplier'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Nom du contact</label>
+						<input class="form-control" type="text" name="name_contact_supplier" id="name_contact_supplier"
+							value="<%= row['name_contact_supplier'] %> " />
+					</p>
+					<p>
+						<label class=" row justify-content-center">Numéro d'entreprise (SIRET)</label>
+						<input class="form-control" type="text" name="bin_supplier" id="bin_supplier"
+							value="<%= row['bin_supplier'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Email</label>
+						<input class="form-control" type="text" name="email_supplier" id="email_supplier"
+							value="<%= row['email_supplier'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Téléphone</label>
+						<input class="form-control" type="number" name="phone_supplier" id="phone_supplier"
+							value="<%= row['phone_supplier'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Adresse</label>
+						<input class="form-control" type="text" name="address_supplier" id="address_supplier"
+							value="<%= row['address_supplier'] %> " />
+					</p>
+					<p>
+						<label class="row justify-content-center">Ville</label>
+						<% cityList.forEach(function(city) { %>
+						<input class="form-control" type="text" name="name_city" id="name_city"
+							value="<%= row['name_city'] %> " />
+							<% }); %>
+					<p>
+						<input type="reset" value="Réinitialiser" class="btn btn-warning" />
+						<input type="submit" value="Valider" class="btn btn-success" />
+					</p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<p>
+		<%=message %>
+	</p>
+	<p id="lblMessage"></p>
+	</article>
+	<footer>
+		<%- include("partials/footerBackOffice.ejs"); -%>
+	</footer>
+	<script>
+        // document.getElementById("btValider").addEventListener("click", function(event) {
+        //     event.preventDefault();
+        //     console.log(document.getElementById("prix").value);
+        //     let prix = document.getElementById("prix").value;
+        //     console.log(!isNaN(prix));
+        //     //alert("POST ANNULE");
+        //     if (estNumeriqueEntier(document.getElementById("prix").value)) {
+        //         document.getElementById("formulaireAjoutProduit").submit();
+        //         //document.getElementById("messageClient").innerHTML = "Formulaire validé";
+        //     } else {
+        //         document.getElementById("messageClient").innerHTML = "Formulaire invalide";
+        //     }
+        // });
+	</script>
+</body>
+
+</html

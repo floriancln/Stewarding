@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>insertUser.ejs</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css">
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<nav>
+	<%- include("partials/navBar.ejs"); -%>
+</nav>
+
+
+
+<body class="container-fluid">
+
+	<div class="mb-1">
+		<a class="btn btn-primary" type="button" href="services">
+			<img src="css/bootstrap/bootstrap-icons/icons/arrow-left-circle-fill.svg" width="30" height="30"
+				fill="%ffd700" alt="back-to-services">
+		</a>
+	
+		<a class="btn btn-danger" type="button" href="deleteUser">
+			<img src="css/bootstrap/bootstrap-icons/icons/trash-fill.svg" width="30" height="30"
+				fill="%ffd700" alt="delete-user">
+		</a>
+
+		<a class="btn btn-warning" type="button" href="updateUser">
+			<img src="css/bootstrap/bootstrap-icons/icons/arrow-clockwise.svg" width="30" height="30"
+				fill="%ffd700" alt="update-user">
+		</a>
+	</div>
+
+	<h1 class="mb-6 row justify-content-center">Créer un profil utilisateur</h1>
+	<div class=" row justify-content-center">
+		<div class="col-md-3">
+			<form method="POST" action="/insertUserValidation" id="formAddUser">
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Nom</label>
+					<input type="textarea" class="form-control" name="name_user" id="name_user"
+						value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Prénom</label>
+					<input type="textarea" class="form-control" name="firstname_user"
+						id="firstname_user" value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">E-mail</label>
+					<input type="text" class="form-control" name="email_user" id="email_user"
+						value="" />
+				</div>
+
+				<div class="mb-3">
+					<label class="row justify-content-center">Password</label>
+					<input type="password" class="form-control" name="password_user"
+						id="password_user" value="" />
+				</div>
+
+				<div class="row justify-content-center">
+					<input type="submit" class="btn btn-primary mb-3 " value="Valider"
+						id="btValidate" class="bouton" />
+				</div>
+			</form>
+			<div class="row justify-content-center">
+				<table class="table justify-content-center">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nom</th>
+							<th scope="col">Prénom</th>
+							<th scope="col">Email</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% userList.forEach(function(users){%>
+							<tr>
+								<td>
+									<%= users.id_user %>
+								</td>
+								<td>
+									<%= users.name_user %>
+								</td>
+								<td>
+									<%= users.firstname_user %>
+								</td>
+								<td>
+									<%= users.email_user %>
+								</td>
+								<td>
+									<input type="submit"
+										class="btn btn-warning mb-3 "
+										value="Modifier" id="btUpdate" />
+								</td>
+								<td method="POST" action="/deleteUserValidation">
+									<input type="submit" 
+										class="btn btn-danger mb-3 "
+										value="Supprimer" id="btDelete" />
+								</td>
+							</tr>
+							<% }); %>
+					</tbody>
+				</table>
+			</div>
+
+			<p>
+				<%=message %>
+			</p>
+		</div>
+	</div>
+	<footer>
+		<%- include ("partials/footerBackOffice.ejs"); -%>
+	</footer>
+</body>
+
+</html>
